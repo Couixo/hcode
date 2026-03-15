@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 通用尺寸 -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- 标题尺寸 -->
+    <dimen name="title_text_size">24sp</dimen>
+    
+    <!-- 输入框相关尺寸 -->
+    <dimen name="input_margin_bottom">16dp</dimen>
+    <dimen name="input_text_size">16sp</dimen>
+    
+    <!-- 按钮尺寸 -->
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="button_margin_bottom">24dp</dimen>
+    
+    <!-- 结果区域尺寸 -->
+    <dimen name="result_label_text_size">16sp</dimen>
+    <dimen name="result_margin_bottom">8dp</dimen>
+    <dimen name="result_text_size">20sp</dimen>
+    <dimen name="result_container_padding">12dp</dimen>
+    <dimen name="result_container_corner_radius">8dp</dimen>
+    
+    <!-- 复制按钮尺寸 -->
+    <dimen name="copy_button_text_size">14sp</dimen>
+    
+    <!-- 布局内边距 -->
+    <dimen name="layout_padding">16dp</dimen>
+    <dimen name="layout_margin_bottom">32dp</dimen>
+    
+    <!-- 平板适配尺寸 -->
+    <dimen name="tablet_layout_padding">24dp</dimen>
+    <dimen name="tablet_title_text_size">28sp</dimen>
+    <dimen name="tablet_input_text_size">18sp</dimen>
+    <dimen name="tablet_button_text_size">18sp</dimen>
+    <dimen name="tablet_result_text_size">24sp</dimen>
+    <dimen name="tablet_result_container_padding">16dp</dimen>
+</resources>
