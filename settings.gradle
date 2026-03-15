@@ -13,6 +13,6 @@ repositories {
 }
 }
 rootProject.name = "hcode"
-include ':app'
+include ':src:main'
 
 
