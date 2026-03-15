@@ -12,7 +12,7 @@ repositories {
  mavenCentral()
 }
 }
-rootProject.name = "hcode"
+rootProject.name = "org.somebody.hcode"
 include ':src:main'
 
 
