@@ -1,3 +1,22 @@
+// 构建脚本配置（必须包含 repositories）
+buildscript {
+    repositories {
+        google() // Google 仓库（Gradle 插件在这里）
+        mavenCentral() // 中央仓库
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.1'
+    }
+}
+
+// 项目仓库配置（给 App 依赖用）
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+ 
 // 1. 仓库配置（必须放在 buildscript 外部）
 allprojects {
     repositories {
@@ -6,11 +25,6 @@ allprojects {
     }
 }
 // 2. 构建脚本配置（插件依赖）
-buildscript {
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.1'
-    }
-}
 apply plugin: 'com.android.application'
 // 3. Android模块配置（编译规则）
 android {
