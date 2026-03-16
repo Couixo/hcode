@@ -1,22 +1,16 @@
+// 1. 声明项目包含的模块
+include ':lib'  // 包含library模块
 
-buildscript {
+// 2. 配置仓库（Android项目常用）
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        // 添加Google Maven仓库
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        // 添加Android Gradle插件依赖（替换为你需要的版本）
-        classpath 'com.android.tools.build:gradle:9.0.0'
+        google()  // Google Maven仓库
+        mavenCentral()  // Maven中央仓库
+    
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
  
 rootProject.name = "org.somebody.hcode"
 include ':'
