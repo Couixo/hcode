@@ -1,5 +1,5 @@
 // 1. 声明项目包含的模块
-include ':lib'  // 包含library模块
+include ':libs'  // 包含library模块
 include ':'
 rootProject.name = "org.somebody.hcode"
 // 2. 配置仓库（Android项目常用）
