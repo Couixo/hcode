@@ -5,9 +5,13 @@ include ':lib'  // 包含library模块
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()  // Google Maven仓库
-        mavenCentral()  // Maven中央仓库
-    
+        // 添加Google Maven仓库
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // 添加Android Gradle插件依赖（替换为你需要的版本）
+        classpath 'com.android.tools.build:gradle'
     }
 }
 
