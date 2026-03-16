@@ -18,6 +18,7 @@ android {
         targetSdkVersion 34
         versionCode 1
         versionName "1.0"
+        namespace "org.somebody.hcode" // 替换为你的包名
     }
     buildTypes {
         release {
