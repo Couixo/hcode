@@ -8,7 +8,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.3.1'
     }
 }
-
 // 项目仓库配置（给 App 依赖用）
 allprojects {
     repositories {
@@ -16,7 +15,6 @@ allprojects {
         mavenCentral()
     }
 }
- 
 // 1. 仓库配置（必须放在 buildscript 外部）
 allprojects {
     repositories {
