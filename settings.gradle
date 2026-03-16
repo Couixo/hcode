@@ -1,6 +1,7 @@
 // 1. 声明项目包含的模块
 include ':lib'  // 包含library模块
-
+include ':'
+rootProject.name = "org.somebody.hcode"
 // 2. 配置仓库（Android项目常用）
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -14,7 +15,3 @@ dependencyResolutionManagement {
         classpath 'com.android.tools.build:gradle'
     }
 }
-
- 
-rootProject.name = "org.somebody.hcode"
-include ':'
