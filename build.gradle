@@ -1,21 +1,22 @@
-buildscript {
-    allprojects {
-     repositories {
-        google() // Google Maven仓库
-        mavenCentral() // Maven中央仓库
-     }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.1' // 插件依赖放这里
+// 1. 仓库配置（必须放在 buildscript 外部）
+allprojects {
+    repositories {
+        google() // Google Maven 仓库
+        mavenCentral() // Maven 中央仓库
     }
 }
-// 2. 应用插件（告诉Gradle这是Android应用）
+// 2. 构建脚本配置（插件依赖）
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.1'
+    }
+}
 apply plugin: 'com.android.application'
 // 3. Android模块配置（编译规则）
 android {
     compileSdkVersion 34
     defaultConfig {
-        applicationId "com.example.hcode"
+        applicationId "org.somebody.hcode"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 1
