@@ -13,6 +13,6 @@ repositories {
 }
 }
 rootProject.name = "org.somebody.hcode"
-include ':app'
+include ':'
 
 
