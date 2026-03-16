@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         // 添加Android Gradle插件依赖（替换为你需要的版本）
-        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath 'com.android.tools.build:gradle:9.0.0'
     }
 }
 
