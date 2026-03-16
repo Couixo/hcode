@@ -1,8 +1,9 @@
 buildscript {
     allprojects {
-    repositories {
+     repositories {
         google() // Google Maven仓库
         mavenCentral() // Maven中央仓库
+     }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.3.1' // 插件依赖放这里
