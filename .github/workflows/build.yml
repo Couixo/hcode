@@ -25,9 +25,8 @@ jobs:
       run: gradle assembleRelease
        
     - name: Find APK
-      run: |
-          APK_PATH=$(find . -name "*.apk" -path "*/outputs/apk/*" | head -n 1)
-          echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
+      run: APK_PATH=$(find . -name "*.apk" -path "*/outputs/apk/*" | head -n 1)
+           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           
     - name: Upload APK
       uses: actions/upload-artifact@v4
