@@ -35,4 +35,3 @@ jobs:
       with:
           name: app-release
           path: ${{ env.APK_PATH }}
- 
