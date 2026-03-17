@@ -1,58 +1,49 @@
 package org.somebody.hcode;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
 public class ChallengeValidator {
+    
     static {
-        try {
-            System.loadLibrary("p4bu");
-        } catch (UnsatisfiedLinkError e) {
-            throw new RuntimeException("无法加载p4bu.so库文件", e);
-        }
+        System.loadLibrary("p4bu");
     }
-
+    
     private static native String jni_getSalt();
-
-    // 保留生成挑战码的两个重载方法（兼容原有调用）
-    public static String generateChallenge(String userInput) {
-        return encrypt(getSalt() + checkNonEmpty(userInput));
-    }
-
+    
     public static String generateChallenge() {
-        return encrypt(getSalt() + System.currentTimeMillis());
+        String salt = jni_getSalt();
+        return encrypt(salt.trim() + requestCode);
     }
-
-    // 加密逻辑：合并重复的StringBuilder操作
-    private static String encrypt(String toEncrypt) {
+    
+    // 已删除 validateResponse 方法
+    
+    public static String encrypt(String toEncrypt) {
+        String md5Hash = md5(toEncrypt);
+        String replaced = replaceChars(md5Hash);
+        return replaced.substring(0, 6);
+    }
+    
+    private static String md5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digest = md.digest(toEncrypt.getBytes(StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder(32); // 预分配容量，优化性能
-            for (byte b : digest) sb.append(String.format("%02x", b));
-            return sb.toString()
-                   .replace('a','1').replace('b','2').replace('c','3')
-                   .replace('d','4').replace('e','5').replace('f','6')
-                   .substring(0,6);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("MD5算法不可用", e);
+            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-
-    // 工具方法：保留非空校验和盐值获取
-    private static String checkNonEmpty(String input) {
-        if (input == null || input.isBlank()) { // 使用JDK11+的isBlank()简化判断
-            throw new IllegalArgumentException("输入不能为空");
-        }
-        return input.trim();
-    }
-
-    private static String getSalt() {
-        String salt = jni_getSalt();
-        if (salt == null || salt.isBlank()) {
-            throw new RuntimeException("无法获取有效的盐值");
-        }
-        return salt.trim();
+    
+    private static String replaceChars(String input) {
+        return input.replace('a', '1')
+                   .replace('b', '2')
+                   .replace('c', '3')
+                   .replace('d', '4')
+                   .replace('e', '5')
+                   .replace('f', '6');
     }
 }
