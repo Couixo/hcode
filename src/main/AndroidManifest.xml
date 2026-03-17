@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-
     <!-- 声明不强制要求手表硬件，同时支持手机和Wear OS -->
     <uses-feature android:name="android.hardware.type.watch" android:required="false" />
 
