@@ -45,6 +45,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            // 2. 指定JNI库的存放路径（默认是src/main/jniLibs）
+            jniLibs.srcDirs = ['libs']  // 若库在libs目录下
+        }
+    }
 }
 // 4. 模块依赖（给App用的库）
 dependencies {
