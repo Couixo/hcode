@@ -48,4 +48,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}  # 从创建Release步骤获取上传URL
           asset_path: ${{ env.APK_PATH }}  # 找到的APK路径
           asset_name: app-release.apk  # 显示在Release中的文件名
-          asset_content_type: application/vnd.android.package-archive  # MIME类型
+          asset_content_type: application/vnd.android.package-archive  #
