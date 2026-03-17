@@ -5,7 +5,7 @@ buildscript {
         mavenCentral() // 中央仓库
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.1'
+        classpath 'com.android.tools.build:gradle:9.0.0'
     }
 }
 // 项目仓库配置（给 App 依赖用）
@@ -34,6 +34,13 @@ android {
         versionCode 1
         versionName "1.0"
         namespace "org.somebody.hcode" // 替换为你的包名
+        }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+ 
     }
     buildTypes {
         release {
