@@ -3,20 +3,20 @@ package org.somebody.hcode;
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
 
-public class ChallengeValidator {
-    
+ public class ChallengeValidator {
     static {
         System.loadLibrary("p4bu");
     }
     
     private static native String jni_getSalt();
     
-    public static String generateChallenge() {
+    // 添加 requestCode 参数
+    public static String generateChallenge(String requestCode) {
         String salt = jni_getSalt();
+        // 使用传入的 requestCode
         return encrypt(salt.trim() + requestCode);
     }
     
-    // 已删除 validateResponse 方法
     
     public static String encrypt(String toEncrypt) {
         String md5Hash = md5(toEncrypt);
