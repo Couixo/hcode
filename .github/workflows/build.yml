@@ -23,29 +23,15 @@ jobs:
     
     - name: Build with Gradle
       run: gradle assembleRelease
-  
+       
     - name: Find APK
       run: |
           APK_PATH=$(find . -name "*.apk" -path "*/outputs/apk/*" | head -n 1)
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
       with:
-          tag_name: "1.0" # 使用触发的标签名
-          release_name: Release 1.0 # 发布名称
-          draft: false  # 不设为草稿
-          prerelease: false  # 非预发布
-          
-    - name: Upload APK to Release
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}  # 从创建Release步骤获取上传URL
-          asset_path: ${{ env.APK_PATH }}  # 找到的APK路径
-          asset_name: app-release.apk  # 显示在Release中的文件名
-          asset_content_type: application/vnd.android.package-archive  #
+          name: app-release
+          path: ${{ env.APK_PATH }}
+ 
