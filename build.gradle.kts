@@ -1,4 +1,20 @@
-// 1. 项目级配置（原根目录build.gradle）
+// 1. 插件仓库配置（必须放在最顶部）
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "com.android") {
+                useModule("com.android.tools.build:gradle:${requested.version}")
+            }
+        }
+    }
+}
+
+// 2. 项目级配置
 buildscript {
     repositories {
         google()
@@ -17,9 +33,9 @@ allprojects {
     }
 }
 
-// 2. 模块级配置（原app/build.gradle）
+// 3. 模块级配置
 plugins {
-    id("com.android.application") version "9.0.0" // 与buildscript中的版本一致
+    id("com.android.application") version "9.0.0"
     id("org.jetbrains.kotlin.android") version "1.9.20"
 }
 
