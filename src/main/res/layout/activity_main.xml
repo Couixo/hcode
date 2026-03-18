@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:scrollbars="vertical"
+    android:fillViewport="true">
 
-    <!-- 输入框容器（MD3风格） -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:hint="请输入6位请求码">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_code"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="6"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="请输入6位请求码">
 
-    <!-- 生成按钮（MD3风格） -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/generate_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="生成挑战码"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/input_layout"
-        android:layout_marginTop="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="6" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- 结果显示区 -->
-    <TextView
-        android:id="@+id/result_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/md_theme_onSurface"
-        app:layout_constraintTop_toBottomOf="@id/generate_button"
-        android:layout_marginTop="16dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/generateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生成挑战码"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="挑战码："
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+</ScrollView>
