@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:9.0.0'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.10'
     }
 }
 // 项目仓库配置（给 App 依赖用）
@@ -24,7 +24,6 @@ allprojects {
 }
 // 2. 构建脚本配置（插件依赖）
 apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
 // 3. Android模块配置（编译规则）
 android {
     compileSdkVersion 36
@@ -59,5 +58,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'  // MD3支持
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk25:1.9.20'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.10'
 }
