@@ -1,101 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white"
-    tools:context=".MainActivity">
+    android:padding="16dp">
 
-    <LinearLayout
+    <!-- 输入框容器（MD3风格） -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/layout_padding">
+        app:layout_constraintTop_toTopOf="parent"
+        app:hint="请输入6位请求码">
 
-        <!-- 标题 -->
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/layout_margin_bottom" />
+            android:inputType="number"
+            android:maxLength="6"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- 输入框 -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/input_margin_bottom"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="@string/input_hint">
+    <!-- 生成按钮（MD3风格） -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/generate_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="生成挑战码"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/input_layout"
+        android:layout_marginTop="16dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextRequestCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/input_text_size"
-                android:inputType="text"
-                android:maxLines="1"
-                android:imeOptions="actionDone" />
+    <!-- 结果显示区 -->
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/md_theme_onSurface"
+        app:layout_constraintTop_toBottomOf="@id/generate_button"
+        android:layout_marginTop="16dp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- 生成按钮 -->
-        <Button
-            android:id="@+id/buttonGenerate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/generate_button"
-            android:textSize="@dimen/button_text_size"
-            android:layout_marginBottom="@dimen/button_margin_bottom"
-            style="@style/Widget.MaterialComponents.Button"
-            android:enabled="false" />
-
-        <!-- 结果区域 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/result_label"
-            android:textSize="@dimen/result_label_text_size"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginBottom="@dimen/result_margin_bottom" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/result_container_padding">
-
-            <TextView
-                android:id="@+id/textViewChallengeCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/waiting_input"
-                android:textSize="@dimen/result_text_size"
-                android:textColor="@color/black"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:background="@drawable/rounded_background"
-                android:padding="12dp" />
-
-            <Button
-                android:id="@+id/buttonCopy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/clear_button"
-                android:textSize="@dimen/copy_button_text_size"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:visibility="gone" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
