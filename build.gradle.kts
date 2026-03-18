@@ -19,8 +19,8 @@ allprojects {
 
 // 2. 模块级配置（原app/build.gradle）
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("com.android.application") version "9.0.0" // 与buildscript中的版本一致
+    id("org.jetbrains.kotlin.android") version "1.9.20"
 }
 
 android {
