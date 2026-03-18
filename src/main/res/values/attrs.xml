@@ -1,4 +1,0 @@
-<resources>
-    <attr name="colorBackground" format="color" />
-    <attr name="hint" format="string" />
-</resources>
