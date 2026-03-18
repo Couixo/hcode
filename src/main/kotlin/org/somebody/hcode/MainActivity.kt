@@ -1,39 +1,40 @@
+package org.somebody.hcode
+
 import android.os.Bundle
-import android.view.HapticFeedbackConstants
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
-import org.somebody.hcode.ChallengeValidator
-import org.somebody.hcode.databinding.ActivityMainBinding // 自动生成的Binding类
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity() {
-    // 使用ViewBinding替代findViewById
-    private lateinit var binding: ActivityMainBinding
+    companion object {
+        init { System.loadLibrary("p4bu") }
+        private external fun jni_getSalt(): String
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 初始化ViewBinding
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        // 按钮点击事件（直接通过binding访问控件）
-        binding.generateButton.setOnClickListener { v ->
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-            
-            val requestCode = binding.inputCode.text.toString().trim()
-            if (requestCode.length != 6) {
-                binding.resultText.text = "请输入6位请求码"
-                binding.resultText.setTextColor(getColor(android.R.color.holo_red_light))
+        val inputCode = findViewById<EditText>(R.id.inputCode)
+        val resultText = findViewById<TextView>(R.id.resultText)
+        val generateButton = findViewById<Button>(R.id.generateButton)
+
+        generateButton.setOnClickListener {
+            val code = inputCode.text.toString().trim()
+            if (code.length != 6) {
+                resultText.text = "请输入6位请求码"
                 return@setOnClickListener
             }
-
-            try {
-                val challengeCode = ChallengeValidator.generateChallenge(requestCode)
-                binding.resultText.text = "挑战码：$challengeCode"
-                binding.resultText.setTextColor(getColor(android.R.color.black))
-            } catch (e: Exception) {
-                binding.resultText.text = "生成失败：${e.message}"
-                binding.resultText.setTextColor(getColor(android.R.color.holo_red_light))
-            }
+            val salt = jni_getSalt().trim()
+            val md5 = MessageDigest.getInstance("MD5")
+                .digest((salt + code).toByteArray(StandardCharsets.UTF_8))
+                .joinToString("") { "%02x".format(it) }
+                .replace(Regex("[a-f]")) { (it.value[0] - 'a' + 1).toString() }
+                .substring(0, 6)
+            resultText.text = "挑战码：$md5"
         }
     }
 }
