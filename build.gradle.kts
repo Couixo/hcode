@@ -18,11 +18,7 @@ allprojects {
     }
 }
 
-// 3. 应用插件
-plugins {
-    id("com.android.application")
-    kotlin("android")
-}
+
 
 // 4. Android模块配置
 android {
