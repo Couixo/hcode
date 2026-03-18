@@ -1,4 +1,4 @@
-// 1. 构建脚本配置（插件依赖）
+// 1. 项目级配置（原根目录build.gradle）
 buildscript {
     repositories {
         google()
@@ -6,11 +6,10 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:9.0.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20") 
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20")
     }
 }
 
-// 2. 项目仓库配置
 allprojects {
     repositories {
         google()
@@ -18,9 +17,12 @@ allprojects {
     }
 }
 
+// 2. 模块级配置（原app/build.gradle）
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
 
-
-// 4. Android模块配置
 android {
     compileSdk = 34
     namespace = "org.somebody.hcode"
@@ -33,11 +35,6 @@ android {
         versionName = "1.0"
     }
 
-    lintOptions {
-        checkReleaseBuilds = false
-        abortOnError = false
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -48,25 +45,15 @@ android {
         }
     }
 
-    sourceSets {
-        getByName("main") {
-            jniLibs.srcDirs("libs")
-        }
-    }
-
-    // 新增：启用ViewBinding（按模块配置）
     buildFeatures {
         viewBinding = true
     }
 }
 
-// 5. 依赖配置
 dependencies {
-    // 基础依赖
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    // Kotlin标准库
-    implementation(kotlin("stdlib-jdk25"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.20")
 }
