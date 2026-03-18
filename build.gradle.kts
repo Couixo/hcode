@@ -72,5 +72,5 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     // Kotlin标准库
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("stdlib-jdk25"))
 }
