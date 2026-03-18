@@ -6,6 +6,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import org.somebody.hcode.ChallengeValidator;
+import org.somebody.hcode.R;
+
 
 /**
  * 主界面Activity：处理用户输入并生成挑战码
