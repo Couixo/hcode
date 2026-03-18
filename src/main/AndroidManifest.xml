@@ -8,7 +8,8 @@
         android:label="响应码生成器"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WearChallenge">
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar"> <!-- 直接使用系统MD3主题 -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
