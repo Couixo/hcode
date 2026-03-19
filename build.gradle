@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:9.1.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20'
-        
+        classpath 'org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.3.20'
     }
 }
 // 项目仓库配置（给 App 依赖用）
