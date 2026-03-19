@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:9.1.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20'
+        
     }
 }
 // 项目仓库配置（给 App 依赖用）
@@ -24,6 +25,8 @@ allprojects {
 }
 // 2. 构建脚本配置（插件依赖）
 apply plugin: 'com.android.application'
+  // 添加 Compose 插件
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 // 3. Android模块配置（编译规则）
 android {
     compileSdkVersion 36
@@ -49,7 +52,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "1.10.5" // 需与Kotlin版本匹配
+        kotlinCompilerExtensionVersion "2.3.20" // 需与Kotlin版本匹配
     }
     sourceSets {
         main {
