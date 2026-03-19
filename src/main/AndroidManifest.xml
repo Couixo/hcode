@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.somebody.hcode">
 
     <application
         android:allowBackup="true"
@@ -8,7 +7,6 @@
         android:label="响应码生成器"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.DayNight.NoActionBar"> <!-- 直接使用系统MD3主题 -->
 
         <activity
             android:name=".MainActivity"
