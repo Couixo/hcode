@@ -18,7 +18,6 @@ allprojects {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: "org.jetbrains.kotlin.android" // 新增：应用 Kotlin 插件
 
 android {
     compileSdkVersion 36
