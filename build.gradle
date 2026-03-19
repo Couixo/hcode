@@ -5,39 +5,48 @@ buildscript {
         maven { url "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap" }
     }    
     dependencies {
-        classpath "com.android.tools.build:gradle:9.1.0"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20"
+        classpath 'com.android.tools.build:gradle:9.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.10'
     }
 }
 plugins {
         id "org.jetbrains.kotlin.plugin.compose" version "2.3.20"
 }
-
+// 项目仓库配置（给 App 依赖用）
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
-
+// 1. 仓库配置（必须放在 buildscript 外部）
+allprojects {
+    repositories {
+        google() // Google Maven 仓库
+        mavenCentral() // Maven 中央仓库
+    }
+}
+// 2. 构建脚本配置（插件依赖）
+apply plugin: 'com.android.application'
+// 3. Android模块配置（编译规则）
 android {
-    compileSdk 36
+    compileSdkVersion 36
     defaultConfig {
         applicationId "org.somebody.hcode"
-        minSdk 23
-        targetSdk 36
+        minSdkVersion 23
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
-        namespace "org.somebody.hcode"
-    }
+        namespace "org.somebody.hcode" // 替换为你的包名
+        }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
-    }
+        }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     buildFeatures {
