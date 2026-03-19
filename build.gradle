@@ -45,6 +45,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.10.5" // 需与Kotlin版本匹配
+    }
+}
     sourceSets {
         main {
             // 2. 指定JNI库的存放路径（默认是src/main/jniLibs）
@@ -55,8 +62,8 @@ android {
 dependencies {
     // 基础依赖
     implementation 'androidx.core:core-ktx:1.18.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.13.0'  // MD3支持
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.compose.ui:ui:1.10.5'
+    implementation 'androidx.compose.material:material:1.10.5'
+​    implementation 'androidx.activity:activity-compose:1.13.0'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.3.20'
 }
