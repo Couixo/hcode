@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"＞
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.somebody.hcode">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="响应码生成器"
         android:roundIcon="@mipmap/ic_launcher"
-        android:supportsRtl="true"＞
+        android:supportsRtl="true">
 
         <activity
             android:name=".MainActivity"
