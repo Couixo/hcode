@@ -72,4 +72,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:2.3.20"
     implementation "androidx.activity:activity-compose:1.13.0"
+    // 基础布局库
+    implementation "androidx.compose.foundation:foundation:1.6.0"
+
 }
