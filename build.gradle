@@ -16,9 +16,8 @@ allprojects {
         mavenCentral()
     }
 }
-
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 android {
     compileSdkVersion 36
     defaultConfig {
