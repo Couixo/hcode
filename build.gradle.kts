@@ -18,7 +18,7 @@ allprojects {
 }
 
 plugins {
-    id("com.android.application")
+    id("com.android.application") version "9.1.0"
     id("org.jetbrains.kotlin.plugin.compose") version "2.3.20"
 }
 
