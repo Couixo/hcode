@@ -22,9 +22,6 @@ allprojects {
         mavenCentral() // Maven 中央仓库
     }
 }
-// 2. 构建脚本配置（插件依赖）
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.compose'
 android {
     compileSdkVersion 36
     defaultConfig {
