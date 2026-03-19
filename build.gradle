@@ -55,6 +55,7 @@ android {
         }
     }
 }
+apply plugin: 'com.android.application'
 dependencies {
     // 基础依赖
     implementation 'androidx.core:core-ktx:1.18.0'
