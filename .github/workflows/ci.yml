@@ -16,7 +16,7 @@ jobs:
         uses: jetsung/setup-zig@v0.0.4
         with:
     # Zig version (e.g. 0.15.2, dev, master). Leave empty for latest stable.
-          version: 0.15.0 # optional, default is 
+          version: 0.15.2 # optional, default is 
           
 
       
