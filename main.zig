@@ -95,4 +95,4 @@ fn crackThread(
             return;
         }
     }
-} 
+}
