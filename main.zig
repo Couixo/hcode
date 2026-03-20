@@ -19,7 +19,7 @@ pub fn main() !void {
     // 配置参数
     const target: u32 = 0x296661; // 目标前缀（ASCII值）
     const suffix = "334928";       // 固定后缀
-    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
     const max_salt_len = 5;        // 盐值最大长度
 
     // 编译期生成字符映射表
@@ -95,4 +95,3 @@ fn crackThread(
         }
     }
 }
- 
