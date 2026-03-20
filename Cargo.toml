@@ -1,13 +1,8 @@
 [package]
 name = "md5-cracker"
 version = "0.1.0"
-edition = "2021"
 
-# 关键：指定根目录的main.rs为可执行文件
-[[bin]]
-name = "md5-cracker"  # 可执行文件名称（自定义）
-path = "main.rs"      # 源码路径（根目录下的main.rs）
-
+# 依赖库
 [dependencies]
-md-5 = "0.10"
-num_cpus = "1.16"
+ring = "0.17.0"       # 加密库（替代md5库，用于MD5计算）
+num_cpus = "1.16.0"   # 获取CPU核心数
