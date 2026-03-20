@@ -6,7 +6,7 @@ pub fn main() !void {
     const target: u32 = 0x296661; // 目标前缀（ASCII值）
     const suffix = "334928";       // 固定后缀
     const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const max_salt_len = 5;        // 盐值最大长度
+    const max_salt_len = 4;        // 盐值最大长度
 
     // 字符映射表（与原逻辑一致）
     const char_map = comptime blk: {
