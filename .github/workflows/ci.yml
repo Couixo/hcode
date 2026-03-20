@@ -1,0 +1,28 @@
+name: MD5 Crack (Manual Trigger)
+
+on:
+  workflow_dispatch:  # 仅保留手动触发
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Zig
+        uses: goto-bus-stop/setup-zig@v2
+        with:
+          zig-version: 0.12.0
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev
+
+      - name: Install Zig crypto package
+        run: zig build --init && zig-pkg add crypto
+
+      - name: Build program
+        run: zig build-exe main.zig -lc -lcrypto
+
+      - name: Run program
+        run: ./main
