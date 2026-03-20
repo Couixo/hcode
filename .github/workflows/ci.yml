@@ -1,29 +1,25 @@
-name: MD5 Crack (Manual Trigger)
-
+name: MD5 Crack Workflow
 on:
-  workflow_dispatch:  # 仅保留手动触发
+  push:
+    branches: [ main ]  # 推送代码到main分支时触发
+  workflow_dispatch:    # 允许手动触发
 
 jobs:
-  build-and-run:
-    runs-on: ubuntu-slim
+  crack:
+    runs-on: ubuntu-latest  # 使用Ubuntu环境
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # 拉取代码
 
-      - name: Setup Zig
-  # You may pin to the exact commit or the version.
-  # uses: jetsung/setup-zig@ece60a5f01428e90311476245667dc49e3f84513
-        uses: jetsung/setup-zig@v0.0.4
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1  # 安装Rust
         with:
-    # Zig version (e.g. 0.15.2, dev, master). Leave empty for latest stable.
-          version: 0.13.2 # optional, default is 
-          
+          toolchain: stable
+          profile: minimal
+          override: true
 
-      
-
-      - name: Install Zig crypto package
-        run: zig init 
-      - name: Build program
-        run: zig build-exe main.zig -O ReleaseFast
-      - name: Run program
-        run: ./main
+      - name: Build and run
+        run: |
+          cargo build --release  # 编译程序
+          cargo run --release    # 运行程序
+ 
