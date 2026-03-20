@@ -1,3 +1,13 @@
+[package]
+name = "md5-cracker"
+version = "0.1.0"
+edition = "2021"
+
+# 关键：指定根目录的main.rs为可执行文件
+[[bin]]
+name = "md5-cracker"  # 可执行文件名称（自定义）
+path = "main.rs"      # 源码路径（根目录下的main.rs）
+
 [dependencies]
 md-5 = "0.10"
-num_cpus = "1.16"
+num_cpus = "1.16" 
