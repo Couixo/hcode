@@ -1,6 +1,6 @@
 const std = @import("std");
 const c = @cImport({
-    @cInclude("openssl/md5.h"); // 直接链接系统OpenSSL
+    @cInclude("openssl/md5.h");
 });
 
 pub fn main() !void {
@@ -94,4 +94,3 @@ fn crackThread(
         }
     }
 }
- 
