@@ -1,12 +1,14 @@
 const std = @import("std");
-const crypto = @import("crypto"); // 需安装：zig-pkg add crypto
+const c = @cImport({
+    @cInclude("openssl/md5.h"); // 直接链接系统OpenSSL
+});
 
 pub fn main() !void {
     // 配置参数（可修改）
     const target: u32 = 0x296661; // 目标前缀（ASCII值）
     const suffix = "334928";       // 固定后缀
     const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const max_salt_len = 4;        // 盐值最大长度
+    const max_salt_len = 5;        // 盐值最大长度
 
     // 字符映射表（与原逻辑一致）
     const char_map = comptime blk: {
@@ -69,11 +71,13 @@ fn crackThread(
         }
         const salt = salt_buf[0..salt_len];
 
-        // 计算MD5哈希（依赖OpenSSL）
-        var md5 = crypto.md.Md5.init(.{});
-        md5.update(salt);
-        md5.update(suffix);
-        const hash = md5.final();
+        // 计算MD5哈希（直接调用OpenSSL）
+        var md5_ctx: c.MD5_CTX = undefined;
+        c.MD5_Init(&md5_ctx);
+        c.MD5_Update(&md5_ctx, salt.ptr, salt.len);
+        c.MD5_Update(&md5_ctx, suffix.ptr, suffix.len);
+        var hash: [16]u8 = undefined;
+        c.MD5_Final(&hash, &md5_ctx);
 
         // 转换哈希前缀并匹配
         var translated: [16]u8 = undefined;
