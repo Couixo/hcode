@@ -1,40 +1,44 @@
 const std = @import("std");
-const c = @cImport({
-    @cInclude("openssl/md5.h");
-});
+const md5 = std.crypto.hash.Md5;
+
+// 泛型字符映射函数（Zig 0.15+语法）
+fn createCharMap(comptime EnumType: type) [256]u8 {
+    var map: [256]u8 = undefined;
+    for (0..256) |i| {
+        const char = @intCast(u8, i);
+        map[i] = switch (@enumFromInt(EnumType, char)) {
+            .a => '1', .b => '2', .c => '3',
+            .d => '4', .e => '5', .f => '6',
+            else => char,
+        };
+    }
+    return map;
+}
 
 pub fn main() !void {
-    // 配置参数（可修改）
+    // 配置参数
     const target: u32 = 0x296661; // 目标前缀（ASCII值）
     const suffix = "334928";       // 固定后缀
     const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const max_salt_len = 5;        // 盐值最大长度
 
-    // 字符映射表（与原逻辑一致）
-    const char_map = comptime blk: {
-        var map: [256]u8 = undefined;
-        for (0..256) |i| {
-            map[i] = switch (@intToEnum(std.ascii.Lowercase, @intCast(u8, i))) {
-                .a => '1', .b => '2', .c => '3',
-                .d => '4', .e => '5', .f => '6',
-                else => @intCast(u8, i),
-            };
-        }
-        break :blk map;
-    };
+    // 编译期生成字符映射表
+    const char_map = comptime createCharMap(std.ascii.Lowercase);
 
     // 多线程破解
     const thread_count = try std.Thread.getCpuCount();
-    var threads: [thread_count]std.Thread = undefined;
+    var threads = std.ArrayList(std.Thread).init(std.heap.page_allocator);
+    defer threads.deinit();
+
     var found = std.atomic.Atomic(bool).init(false);
 
     for (0..thread_count) |i| {
-        threads[i] = try std.Thread.spawn(.{}, crackThread, .{
+        try threads.append(try std.Thread.spawn(.{}, crackThread, .{
             i, thread_count, chars, max_salt_len, suffix, target, &char_map, &found,
-        });
+        }));
     }
 
-    for (threads) |*t| t.join();
+    for (threads.items) |*t| t.join();
     if (!found.load(.SeqCst)) std.debug.print("未找到匹配的盐值\n", .{});
 }
 
@@ -50,11 +54,12 @@ fn crackThread(
     found: *std.atomic.Atomic(bool),
 ) void {
     const allocator = std.heap.page_allocator;
-    var salt_buf = allocator.alloc(u8, max_salt_len) catch return;
+    const salt_buf = allocator.alloc(u8, max_salt_len) catch return;
     defer allocator.free(salt_buf);
 
-    // 遍历所有盐值组合（按线程分配任务）
-    for (0..std.math.pow(usize, chars.len, max_salt_len)) |idx| {
+    // 遍历所有盐值组合
+    const total_combinations = std.math.pow(usize, chars.len, max_salt_len);
+    for (0..total_combinations) |idx| {
         if (found.load(.SeqCst)) return;
         if (idx % thread_count != thread_id) continue;
 
@@ -71,13 +76,9 @@ fn crackThread(
         }
         const salt = salt_buf[0..salt_len];
 
-        // 计算MD5哈希（直接调用OpenSSL）
-        var md5_ctx: c.MD5_CTX = undefined;
-        c.MD5_Init(&md5_ctx);
-        c.MD5_Update(&md5_ctx, salt.ptr, salt.len);
-        c.MD5_Update(&md5_ctx, suffix.ptr, suffix.len);
-        var hash: [16]u8 = undefined;
-        c.MD5_Final(&hash, &md5_ctx);
+        // 计算MD5哈希（使用Zig标准库）
+        var hash: [md5.digest_length]u8 = undefined;
+        md5.hash(salt ++ suffix, &hash, .{});
 
         // 转换哈希前缀并匹配
         var translated: [16]u8 = undefined;
@@ -94,3 +95,4 @@ fn crackThread(
         }
     }
 }
+ 
