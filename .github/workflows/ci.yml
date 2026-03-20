@@ -25,6 +25,6 @@ jobs:
       - name: Install Zig crypto package
         run: zig init 
       - name: Build program
-        run: zig build-exe main.zig -O ReleaseFast -target x86_64-linux -static -lc -lcrypto
+        run: zig build-exe main.zig -O ReleaseFast -target x86_64-linux -static
       - name: Run program
         run: ./main
