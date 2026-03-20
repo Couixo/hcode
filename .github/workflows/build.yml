@@ -1,5 +1,5 @@
 name: Build APK
-on:
+vvon:
   push:
     branches: [ main, master ]
   pull_request:
