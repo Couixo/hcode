@@ -1,10 +1,11 @@
 const std = @import("std");
 const md5 = std.crypto.hash.Md5;
 
-// 泛型字符映射函数（Zig 0.15+语法）
+// 泛型字符映射函数（修复@intCast语法）
 fn createCharMap(comptime EnumType: type) [256]u8 {
     var map: [256]u8 = undefined;
     for (0..256) |i| {
+        // 修复：Zig 0.15+ @intCast使用泛型参数，而非第二个参数
         const char = @intCast(u8, i);
         map[i] = switch (@enumFromInt(EnumType, char)) {
             .a => '1', .b => '2', .c => '3',
@@ -94,4 +95,4 @@ fn crackThread(
             return;
         }
     }
-}
+} 
