@@ -10,10 +10,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Zig
-        uses: goto-bus-stop/setup-zig@v2
+      - name: Setup Zig
+  # You may pin to the exact commit or the version.
+  # uses: jetsung/setup-zig@ece60a5f01428e90311476245667dc49e3f84513
+        uses: jetsung/setup-zig@v0.0.4
         with:
-          zig-version: 0.12.0
+    # Zig version (e.g. 0.15.2, dev, master). Leave empty for latest stable.
+          version: dev # optional, default is 
+          
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y libssl-dev
