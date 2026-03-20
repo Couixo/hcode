@@ -22,4 +22,3 @@ jobs:
         run: |
           cargo build --release  # 编译程序
           cargo run --release    # 运行程序
- 
