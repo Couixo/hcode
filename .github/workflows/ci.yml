@@ -23,7 +23,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libssl-dev
 
       - name: Install Zig crypto package
-        run: zig build --init && zig-pkg add crypto
+        run: zig init && zig-pkg add crypto
 
       - name: Build program
         run: zig build-exe main.zig -lc -lcrypto
